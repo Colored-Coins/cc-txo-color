@@ -21,6 +21,7 @@ var EXPLORER_URL = process.env.EXPLORER_URL || 'https://testnet.explorer.colored
 var app = require('express')();
 
 app.set('port', process.env.PORT || 4051);
+app.set('host', process.env.HOST || '127.0.0.1');
 
 app.use(require('morgan')('dev'));
 
@@ -40,7 +41,7 @@ app.get('/:txid/:index', function (req, res, next) {
   }));
 });
 
-app.listen(app.get('port'), function (_) {
-  return console.log('Running on port ' + app.get('port'));
+app.listen(app.get('port'), app.get('host'), function (_) {
+  return console.log('Listening on ' + app.get('host') + ':' + app.get('port'));
 });
 

@@ -11,6 +11,7 @@ const
 const app = require('express')()
 
 app.set('port', process.env.PORT || 4051)
+app.set('host', process.env.HOST || '127.0.0.1')
 
 app.use(require('morgan')('dev'))
 
@@ -30,4 +31,4 @@ app.get('/:txid/:index', (req, res, next) => {
   }))
 })
 
-app.listen(app.get('port'), _ => console.log(`Running on port ${app.get('port')}`))
+app.listen(app.get('port'), app.get('host'), _ => console.log(`Listening on ${app.get('host')}:${app.get('port')}`))
