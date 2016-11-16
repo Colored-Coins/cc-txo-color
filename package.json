@@ -9,7 +9,7 @@
     "start": "./app.es5.js"
   },
   "bin": {
-    "cc-txo-color": "./app.es5.js"
+    "cc-txo-color": "./start.sh"
   },
   "dependencies": {
     "express": "^4.14.0",
