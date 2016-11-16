@@ -13,6 +13,10 @@ var _querystring = require('querystring');
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EXPLORER_URL = process.env.EXPLORER_URL || 'https://testnet.explorer.coloredcoins.org/api/',
@@ -27,12 +31,12 @@ app.use(require('morgan')('dev'));
 
 app.get('/:txid/:index', function (req, res, next) {
   // mock response for development
-  var value = 50000000; // [ 500, 5000, 10000, 20000, 50000 ][Math.random()*6|0]
-  return res.send({ assetId: 'La2wKNbCM4zwKfBP1aTDLbtZUXJ9QVv5a8yj3w', value: value });
+  //const value = 500000000 // [ 500, 5000, 10000, 20000, 50000 ][Math.random()*6|0]
+  //return res.send({ assetId: 'La2wKNbCM4zwKfBP1aTDLbtZUXJ9QVv5a8yj3w', value })
 
   _superagent2.default.get(UTXO_ENDPOINT + '?' + _querystring2.default.stringify(req.params), (0, _iferr2.default)(next, function (resp) {
     if (resp.body && resp.body.assets && resp.body.assets.length) {
-      assert(resp.body.assets.length == 1, 'does not yet support multi-asset outputs');
+      (0, _assert2.default)(resp.body.assets.length == 1, 'does not yet support multi-asset outputs');
       var asset = resp.body.assets[0];
       res.send({ assetId: asset.assetId, value: asset.amount });
     } else {

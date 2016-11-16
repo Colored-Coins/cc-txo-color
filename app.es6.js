@@ -3,6 +3,7 @@
 import iferr from 'iferr'
 import request from 'superagent'
 import qs from 'querystring'
+import assert from 'assert'
 
 const
   EXPLORER_URL  = process.env.EXPLORER_URL || 'https://testnet.explorer.coloredcoins.org/api/'
@@ -17,8 +18,8 @@ app.use(require('morgan')('dev'))
 
 app.get('/:txid/:index', (req, res, next) => {
   // mock response for development
-  const value = 50000000 // [ 500, 5000, 10000, 20000, 50000 ][Math.random()*6|0]
-  return res.send({ assetId: 'La2wKNbCM4zwKfBP1aTDLbtZUXJ9QVv5a8yj3w', value })
+  //const value = 500000000 // [ 500, 5000, 10000, 20000, 50000 ][Math.random()*6|0]
+  //return res.send({ assetId: 'La2wKNbCM4zwKfBP1aTDLbtZUXJ9QVv5a8yj3w', value })
 
   request.get(UTXO_ENDPOINT + '?' + qs.stringify(req.params), iferr(next, resp => {
     if (resp.body && resp.body.assets && resp.body.assets.length) {
